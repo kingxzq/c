@@ -1,0 +1,11 @@
+#include<stdio.h>
+int main()
+{
+int input = 0;
+printf("你能考上研究生吗？(1/0)>:");
+scanf("%d",&input);
+if(input==1)
+printf("能\n");
+else
+printf("不能\n");
+}
