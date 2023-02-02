@@ -1,0 +1,11 @@
+#include<stdio.h>
+int main()
+{
+    int a=3;//011
+    int b=5;//101
+    int c=a^b;//按位异或110相同为0相异为1
+    // int c=a|b;//按位或111有1取1无1取0
+    // int c=a&b;//按位与001有0取0无0取1
+    printf("%d\n",c);
+    return 0;
+}
