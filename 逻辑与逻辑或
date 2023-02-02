@@ -1,0 +1,10 @@
+#include<stdio.h>
+int main()
+{
+    int a=0;
+    int b=5;
+    //int c=a&&b;//逻辑与，有一个0为假=0
+    int c=a||b;//逻辑或，有一个非0为真=1
+    printf("%d\n",c);
+    return 0;
+}
