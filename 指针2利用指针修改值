@@ -1,0 +1,11 @@
+#include<stdio.h>
+int main()
+{
+   double a =3.14;
+   double *p = &a;
+   *p=5.54;
+    printf("%lf\n",a);
+    printf("%lf\n",*p);
+    printf("%d\n",sizeof(*p));
+    return 0;
+}
