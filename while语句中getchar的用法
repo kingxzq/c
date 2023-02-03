@@ -1,0 +1,23 @@
+#include <stdio.h>
+int main()
+{
+    int ret = 0;
+    char password[20] = {0};
+    printf("请输入密码:>");
+    scanf("%s", password);
+    while((getchar()) !='\n')
+    {
+        ;
+    }//一直截取之后的字符，夺走换行回车/n值
+    printf("请确认(Y/N):>");
+    ret = getchar();
+    if (ret == 'Y')
+    {
+        printf("确认成功\n");
+    }
+    else
+    {
+        printf("输入失败\n");
+    }
+    return 0;
+}
