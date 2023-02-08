@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<math.h>
+int is_prime(int m)
+{
+	int a;
+	int k=floor(sqrt(n)+0.5);//避免重复算sqrt,通过四舍五入避免浮点误差，1.9999，m=sqrt(m),"0.9999将直接被截掉 只剩1"
+	if(m<=1) return 0;
+	for(a=2;a<=k;a++)//有等号 
+	if (m%a==0) return 0;
+	else return 1;
+ } 
+ int main()
+{
+    int i = 0;
+    printf("输入一个数判断是否素数:");
+    scanf("%d",&i);
+    if(is_prime(i) == 1);
+    {
+        printf("%d是素数\n",i);
+    }
+    else if(is_prime(i) == 0)
+    {
+        printf("%d不是素数\n",i);
+    }
+
+    return 0;
+}
