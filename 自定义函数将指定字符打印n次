@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+void printChar(char ch,int n)
+
+{
+
+    int i;
+
+    for(i=0;i<n;i++)
+
+    {
+
+        printf("%c",ch);
+
+    }
+
+}
+
+int main()
+
+{
+
+    char x;
+
+    int y;
+
+    scanf("%c%d",&x,&y);//输入指定字符（空格）打印次数
+
+    printChar(x,y);//x为需要打印的字符，y为打印次数
+
+    return 0;
+
+}
