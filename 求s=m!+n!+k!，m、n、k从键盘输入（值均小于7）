@@ -1,0 +1,20 @@
+#include <stdio.h>
+int factorial(int n) 
+{
+    int result = 1;
+    int i;
+    for (i = 1; i <= n; i++) 
+    {
+        result *= i;
+    }
+    return result;
+}
+int main() 
+{
+    int m, n, k,s;
+    printf("输入3个整数（值均小于7）: ");
+    scanf("%d %d %d", &m, &n, &k);
+    s = factorial(m) + factorial(n) + factorial(k);
+    printf("%d! + %d! + %d! = %d\n", m, n, k, s);
+    return 0;
+}
