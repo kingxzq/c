@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS // 忽略 fopen() 等函数的安全警告
+#include <stdio.h>
+#include <stdlib.h> // srand() 和 rand() 需要此头文件
+#include <time.h>
+
+int Guess()
+{
+    srand(time(NULL)); // 只在程序开始时调用一次
+    int m = rand() % 1000;
+    int n = rand() % 1000 - 1000; // 使 n 在 [-1000, 0) 范围内
+    int i = rand() % 2;
+    switch (i)
+    {
+    case 0:
+        return m;
+        break; // case 后面的 break 不是必需的
+    case 1:
+        return n;
+        break;
+    }
+    return 0; // 函数应该始终返回一个值
+}
+
+int main()
+{
+    int remain = 10;
+    int answer = Guess(); // 只调用一次
+    int guess = 0;
+    while (guess != answer && remain > 0)
+    {
+        printf("还剩%d次机会\n", remain);
+        scanf("%d", &guess);
+        remain--;
+        if (guess > answer)
+        {
+            printf("猜大了\n");
+        }
+        else if (guess < answer)
+        {
+            printf("猜小了\n");
+        }
+    }
+    if (guess != answer)
+    {
+        printf("很遗憾，答案是%d\n", answer);
+    }
+    else
+    {
+        printf("回答正确!\n");
+        printf("你用了%d次猜中了\n", 10 - remain);
+    }
+    return 0;
+}
