@@ -1,0 +1,59 @@
+#include<stdio.h>
+int main()
+{
+srand(time(NULL));
+int m=(rand()%3);
+int n=(rand()%4);
+int i=(rand()%3);
+switch(m){
+case 0:
+switch(n)
+{
+case 0:
+printf("大吉");
+break;
+case 1:
+printf("中吉");
+break;
+case 2:
+printf("小吉");
+break;
+case 3:
+printf("一般");
+break;
+}
+break;
+case 1:
+switch(n)
+{
+case 0:
+printf("大吉");
+break;
+case 1:
+printf("中吉");
+break;
+case 2:
+printf("小吉");
+break;
+case 3:
+printf("一般");
+break;
+}
+break;
+case 2:
+switch(i)
+{
+case 0:
+printf("小凶");
+break;
+case 1:
+printf("中凶");
+break;
+case 2:
+printf("大凶");
+break;
+}
+break;
+}
+return 0;
+}
