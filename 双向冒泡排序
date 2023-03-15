@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+void bidirectional_bubble_sort(int arr[], int n) 
+{
+    int left = 0, right = n - 1;
+    while (left < right) 
+    {
+        for (int i = left; i < right; i++) 
+        {
+            if (arr[i] > arr[i + 1]) 
+            {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+        right--;
+        for (int i = right; i > left; i--) 
+        {
+            if (arr[i] < arr[i - 1]) 
+            {
+                int temp = arr[i];
+                arr[i] = arr[i - 1];
+                arr[i - 1] = temp;
+            }
+        }
+        left++;
+    }
+}
+int main()
+{
+    int arr[] = { 89,7,66,34,53,97,44,32,6 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    bidirectional_bubble_sort(arr, n);
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
