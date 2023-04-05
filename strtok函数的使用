@@ -1,0 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <string.h>
+#include <stdio.h>
+
+int main()
+{
+	char arr[] = "xzq239604@gmail.com";
+	char*p = "@.";
+
+	char buf[1024] = { 0 };
+	strcpy(buf, arr);
+	//切割buf中的字符串
+
+	char* ret = NULL;
+	for (ret = strtok(arr, p); ret != NULL; ret = strtok(NULL, p))
+		printf("%s\n", ret);
+	//char*ret = strtok(arr, p);
+	//printf("%s\n", ret);
+
+	//ret = strtok(NULL, p);
+	//printf("%s\n", ret);
+
+	//ret = strtok(NULL, p);
+	//printf("%s\n", ret);
+	return 0;
+}
