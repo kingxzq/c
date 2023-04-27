@@ -1,0 +1,35 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<assert.h>
+int my_strlen(char* arr)//非递归
+{
+	int count = 0;
+	while (*arr != '\0')
+	{
+		arr++;
+		count++;
+	}
+	return count;
+}
+int my_strlen1(char* arr)//递归
+{
+		if (*arr != '\0')
+			return 1 + my_strlen1(++arr);
+		return 0;
+}
+int my_strlen2(char* str)
+{
+	int count = 0;
+	if (*str != '\0')
+		count += 1 + my_strlen2(++str);
+	return count;
+}
+int main()
+{
+
+	char arr[] = "abcdef";
+	printf("%d\n",my_strlen(arr));
+	printf("%d\n", my_strlen1(arr));
+	printf("%d\n", my_strlen2(arr));
+	return 0;
+}
