@@ -1,0 +1,23 @@
+#include<stdio.h>
+int fac(int n)//非递归
+{
+	int i = 0;
+	for (i = n-1; i > 0; i--)
+	{
+		n *= i;
+	}
+	return n;
+}
+int fac1(int n)//递归
+{
+	if (n <= 1)
+		return 1;
+	return(n * fac1(n - 1));
+}
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	printf("%d\n", fac(n));
+	printf("%d\n", fac1(n));
+}
