@@ -1,0 +1,323 @@
+//game.h
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>//清屏函数的头文件
+#include <time.h>//srand函数的头文件
+
+#define ROW 9//方便修改棋盘大小
+#define COL 9
+
+#define ROWS ROW+2
+#define COLS COL+2
+
+
+//声明初始化雷盘函数
+void InitBoard(char board[ROWS][COLS],char ret);
+
+//声明打印雷盘函数
+void DisplayBoard(char board[ROWS][COLS]);
+
+int Select();
+
+//声明布置雷函数
+void SetMine(char board[ROWS][COLS], int num);
+
+//声明排查雷的函数
+void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS],int num);
+
+
+//game.c
+#define _CRT_SECURE_NO_WARNINGS 1
+#include "game.h"
+
+
+void InitBoard(char board[ROWS][COLS],char ret)
+{
+	int i = 0, j = 0;
+	for (i = 0; i < ROWS; i++)
+	{
+		for (j = 0; j < COLS; j++)
+		{
+			board[i][j] = ret;
+		}
+	}
+}
+//void DisplayBoard(char board[ROWS][COLS])
+//{
+//	printf("--------扫雷游戏--------\n");
+//	int i = 0, j = 0;
+//	for (i = 0; i <= COL; i++)//打印列标
+//	{
+//		printf("%2d", i);
+//	}
+//	printf("\n");
+//	for (i = 1; i <= ROW; i++)
+//	{
+//		printf("%2d", i);
+//		for (j = 1; j <= COL; j++)
+//		{
+//			printf("%2c", board[i][j]);
+//		}
+//		printf("\n");//打印一行后换行
+//	}
+//	printf("\n");
+//}
+
+
+void DisplayBoard(char board[ROWS][COLS])
+{
+	printf("   --------------扫雷游戏--------------\n");
+	int i = 0, j = 0;
+	printf("   ");
+	for (i = 1; i <= COL; i++)
+	{
+		printf("%3d ", i);
+	}
+	printf("\n");
+	printf("   +");
+	for (i = 0; i < COL; i++)
+	{
+		printf("---+");
+	}
+	printf("\n");
+	for (i = 1; i <= ROW; i++)
+	{
+		printf("%2d", i);
+		printf(" |");
+		for (j = 1; j <= COL; j++)
+		{
+			printf(" %c |", board[i][j]);
+		}
+		printf("\n");
+		printf("   +");
+		for (j = 0; j < COL; j++)
+		{
+			printf("---+");
+		}
+		printf("\n");
+	}
+
+}
+
+
+int Select()
+{
+	system("cls");
+	int num = 0;
+	while (1)
+	{
+		printf("请新选择难度:\n");
+		printf("1.简单模式:5个雷	2.中等模式:10个雷	3.困难模式:15个雷	4.自定义难度(自由输入雷的个数)\n ");
+		int select = 0;
+		getchar();
+		scanf("%d", &select);
+		switch (select)
+		{
+		case 1:
+			printf("简单模式:5个雷\n");
+			num = 5;
+			return num;
+		case 2:
+			printf("中等模式:10个雷\n");
+			num = 15;
+			return num;
+		case 3:
+			printf("困难模式:15个雷\n");
+			num = 30;
+			return num;
+		case 4:
+			printf("自定义难度:");
+			printf("请输入布置雷的个数:\n");
+			getchar();//清楚缓存区
+			int intput = 0;
+			scanf("%d", &intput);
+			num = intput;
+			return num;
+		default:
+			printf("输入错误,请重新选择:\n");
+			break;
+		}
+	}
+	
+}
+
+
+void SetMine(char board[ROWS][COLS], int num)
+{
+	int x = 0, y = 0;
+	int count = 0;
+	while(count < num)
+	{
+		x = 1 + rand() % ROW;
+		y = 1 + rand() % COL;
+		if (board[x][y] == '0')
+		{
+			board[x][y] = '1';
+			count++;
+		}
+	}
+}
+
+
+
+int GetMine(char mine[ROWS][COLS], int x, int y)
+{
+	return mine[x - 1][y - 1] + mine[x - 1][y] + mine[x - 1][y + 1]
+			+ mine[x][y - 1] + mine[x][y + 1]+ mine[x + 1][y - 1] 
+			+ mine[x + 1][y] + mine[x + 1][y + 1] - 8 * '0';
+}
+
+
+Expand(char mine[ROWS][COLS], char show[ROWS][COLS], int x, int y)
+{
+
+	if (x >= 1 && x <= ROW && y >= 1 && y <= COL)
+	{
+		int count = GetMine(mine, x, y);
+		if (count == 0)
+		{
+			show[x][y] = ' ';
+			int i = 0, j = 0;
+			for (i = x - 1; i <= x + 1; i++)
+			{
+				for (j = y - 1; j <= y + 1; j++)
+				{
+					if (show[i][j] == '*' && (i != x || j != y))
+					{
+						Expand(mine, show, i, j);
+					}
+
+				}
+			}
+		}
+		else
+		{
+			show[x][y] = count + '0';
+		}
+	}
+}
+
+
+int is_win(char show[ROWS][COLS])
+{
+	int count1 = 0;
+	int i = 0, j = 0;
+	for (i = 1; i <= ROW; i++)
+	{
+		for (j = 1; j <= COL; j++)
+		{
+			if (show[i][j] != '*')
+			{
+				count1++;
+			}
+		}
+	}
+	return count1;
+}
+
+void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int num)
+{
+	system("cls");
+	DisplayBoard(show);
+	int x = 0, y = 0;
+	int win = 0;
+	while (win < (ROW * COL - num))
+	{
+		printf("请输入排查雷的坐标:");
+		scanf("%d%d", &x, &y);
+		if (x >= 1 && x <= ROW && y >= 1 && y <= COL)
+		{
+			if (mine[x][y] == '1')
+			{
+				system("cls");
+				printf("很遗憾,你被炸死了\n");
+				DisplayBoard(mine);
+				break;
+			}
+			else
+			{
+
+				Expand(mine, show, x, y);
+				system("cls");
+				win = is_win(show);
+				DisplayBoard(show);
+			}
+		}
+		else
+		{
+
+			printf("坐标非法,请重新输入:\n");
+		}
+	}
+	if (win == (ROW * COL - num))
+	{
+		system("cls");
+		printf("恭喜你排雷成功\n");
+		DisplayBoard(show);
+	}
+}
+
+//test.c
+#define _CRT_SECURE_NO_WARNINGS 1
+#include "game.h"
+void menu()
+{
+	printf("*******************************************************************\n");
+	printf("********       1.玩游戏               2.退出游戏          *********\n");
+	printf("*******************************************************************\n");
+	printf("请输入你的选项：");
+}
+void game()
+{
+
+
+	char mine[ROWS][COLS] = { 0 };
+	char show[ROWS][COLS] = { 0 };
+
+
+	InitBoard(mine, '0');
+	InitBoard(show, '*');
+
+
+
+
+	int num = Select();
+	SetMine(mine, num);
+
+
+	FindMine(mine, show, num);
+
+}
+int main()
+{
+	int n = 0;
+	srand((unsigned int)time(NULL));
+	do
+	{
+		menu();
+		scanf("%d", &n);
+		switch (n)
+		{
+		case 1:
+			game();
+			printf("再来一局吗？\n");
+			printf("1.再来一局   2. 退出游戏\n");
+			int again = 0;
+			scanf("%d", &again);
+			if (again == 1)
+			{
+				break;
+			}
+			else
+				n = 0;
+			break;
+		case 2:
+			printf("退出游戏");
+			break;
+		default:
+			printf("选择错误，请重新选择\n");
+			break;
+		}
+	} while (n);
+}
+
