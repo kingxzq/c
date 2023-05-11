@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    int num = 0;
+    printf("请输入一个整数：");
+    scanf("%d", &num);
+
+    printf("您输入的数字的二进制序列为：\n");
+    for (int i = 31; i >= 0; i--) {
+        printf("%d", (num >> i) & 1);
+        if (i % 4 == 0) 
+            printf(" ");
+    }
+    printf("\n");
+
+    printf("偶数位二进制序列为：\n");
+    for (int i = 30; i >= 0; i -= 2) {
+        printf("%d", (num >> i) & 1);
+        if (i % 4 == 0) 
+            printf(" ");
+    }
+    printf("\n");
+
+    printf("奇数位二进制序列为：\n");
+    for (int i = 31; i >= 1; i -= 2) {
+        printf("%d", (num >> i) & 1);
+        if (i % 4 == 1) 
+            printf(" ");
+    }
+    printf("\n");
+
+    return 0;
+}
