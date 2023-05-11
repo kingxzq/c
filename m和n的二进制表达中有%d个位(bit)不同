@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    int m, n, count = 0;
+    printf("请输入两个整数m和n:\n");
+    scanf("%d %d", &m, &n);
+
+    // 计算不同的位数
+    while (m || n) {
+        if ((m & 1) != (n & 1)) {
+            count++;
+        }
+        m >>= 1;
+        n >>= 1;
+    }
+    printf("m和n的二进制表达中有%d个位(bit)不同。\n", count);
+    return 0;
+}
