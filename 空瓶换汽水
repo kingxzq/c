@@ -1,0 +1,16 @@
+#include < stdio.h >
+int main()
+{
+	int money = 0;
+	printf("输入你的现金数:>");
+	scanf("%d", &money);
+	int bottle = money;
+	int count = bottle;
+	while(bottle > 2)
+	{
+		count += (bottle / 2);
+		bottle /= 2;
+	}
+	printf("能喝%d瓶汽水", count);
+	return 0;
+}
