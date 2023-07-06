@@ -1,0 +1,45 @@
+#include<stdio.h>
+#define N 5 //定义矩阵边长
+void Test()
+{
+	int arr[N][N];
+	int n = 1;
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < N; i++)//构造矩阵并打印
+	{
+		for (j = 0; j < N; j++)
+		{
+			arr[i][j] = n++;
+			printf("%-2d ", arr[i][j]);
+		}
+		printf("\n");
+	}
+	int x=0;
+	printf("输入一个数，查看是否在杨氏矩阵内:>");
+	scanf("%d", &x);
+	if(x>arr[N-1][N-1])
+		printf("抱歉，该数字不在数组内");
+	for (i = 0; i < N; i++)
+	{
+		if (x <= arr[i][N - 1])
+		{
+			if (x == arr[i][N - 1])
+				printf("找到了，下标为arr[%d][%d]", i, N-1);
+			else
+			{
+				for (j = 0; j < N; j++)
+				{
+					if(arr[i][j]==x)
+						printf("找到了，下标为arr[%d][%d]", i, j);
+				}
+			}
+		}
+	}
+	
+}
+int main()
+{
+	Test();
+	return 0;
+}
