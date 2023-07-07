@@ -1,0 +1,77 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+
+int Int_Sort(const void* p1, const void* p2)
+{
+	return *(int*)p1 - *(int*)p2;
+}
+void Int_Print(int* arr,int sz)
+{
+	for (int i = 0; i < sz; i++)
+		printf("%d ", arr[i]);
+}
+
+void Test1()
+{
+	int arr[] = { 7,6,5,4,8,9,3,1,2 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	printf("初始序列:> ");
+	Int_Print(arr, sz);
+	printf("\n");
+	qsort(arr, sz, sizeof(arr[0]), Int_Sort);
+	printf("排序后  :> ");
+	Int_Print(arr,sz);
+}
+int Char_Sort(const void* p1, const void* p2)
+{
+	return strcmp((char*)p1, (char*)p2);
+}
+void Test2()
+{
+	char str[]="cbagef";
+	int sz = strlen(str);
+	printf("初始序列:> ");
+	printf("%s", str);
+	printf("\n");
+	qsort(str, sz, sizeof(str[0]), Char_Sort);
+	printf("排序后  :> ");
+	printf("%s", str);
+}
+typedef struct stu
+{
+	char name[10];
+	int age;
+}stu;
+int Str_Sort(const void* p1, const void* p2)
+{
+	return ((stu*)p1)->age - ((stu*)p2)->age;
+}
+void Test3()
+{
+	stu arr[3] = { {"zhangsan",19},{"lisi",20},{"wanger",18} };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	printf("初始序列:> ");
+	for (int i = 0; i < sz; i++)
+	{
+		printf("%s,%d     ", arr[i].name, arr[i].age);
+	}
+	printf("\n");
+	qsort(arr, sz, sizeof(arr[0]), Str_Sort);
+	printf("排序后  :> ");
+	for (int i = 0; i < sz; i++)
+	{
+		printf("%s,%d     ", arr[i].name, arr[i].age);
+	}
+}
+int main()
+{
+	Test1();
+	printf("\n\n\n");
+	Test2();
+	printf("\n\n\n");
+	Test3();
+	return 0;
+}
