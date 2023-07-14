@@ -1,0 +1,57 @@
+#include <stdio.h>     
+#include <stdlib.h>     
+#include <ctype.h>
+#include <assert.h>
+enum State
+{
+    VALID,	//正常返回
+    INVALID //异常返回
+};
+enum State state = INVALID; 	
+int my_atoi(const char* str)
+{
+    assert(str);
+    if (*str == '\0')
+        return 0;
+    while (isspace(*str))
+        str++;
+    int flag = 1;
+    if (*str == '+')
+        str++;
+    else if (*str == '-')
+    {
+        flag = -1;
+        str++;
+    }
+    long long ret = 0;
+    while (*str)
+    {
+        if (isdigit(*str))
+        {
+            ret = ret * 10 + (*str - '0') * flag;
+            if (ret > INT_MAX || ret < INT_MIN)
+                return 0;
+            str++;
+        }
+        else
+        {
+            state = VALID;
+            return (int)ret;
+        }
+    }
+    state = VALID;
+    return (int)ret;
+}
+int main()
+{
+    int ret = my_atoi("-2564E3");
+    if (state == VALID)
+    {
+        printf("合法返回：值为：%d\n", ret);
+    }
+    else
+    {
+        printf("异常返回：值为:%d\n", ret);
+    }
+    return 0;
+}
