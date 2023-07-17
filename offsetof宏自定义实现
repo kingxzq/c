@@ -1,0 +1,16 @@
+#include <stdio.h>
+#define OFFSEROF(type,member) ((size_t)&(((type*)0)->member))
+
+struct foo {
+	char a;
+	char b[10];
+	char c;
+};
+
+int main()
+{
+	printf("OFFSEROF(struct foo,a) is %d\n", OFFSEROF(struct foo, a));
+	printf("OFFSEROF(struct foo,b) is %d\n", OFFSEROF(struct foo, b));
+	printf("OFFSEROF(struct foo,c) is %d\n", OFFSEROF(struct foo, c));
+	return 0;
+}
