@@ -1,0 +1,9 @@
+#define SWAP_ODD_EVEN_BITS(num) (((num & 0xAAAAAAAA) >> 1) | ((num & 0x55555555) << 1))
+
+
+int main()
+{
+	unsigned int num = 0b11010101; // 原始整数，二进制为 11010101
+	unsigned int swapped = SWAP_ODD_EVEN_BITS(num);//    11101010  //十六进制 EA  
+	return 0;
+}
