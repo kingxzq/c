@@ -1,0 +1,34 @@
+struct ListNode* ReverseList(struct ListNode* pHead ) {
+    // write code here
+  
+    //如果只有一个结点 或者 无结点 返回本身
+    if(pHead->next == NULL || pHead == NULL){
+        return pHead;
+    }
+    
+    struct ListNode *p,*q;
+    p = pHead;
+    
+  //q指向最后一个结点 p指向倒数第二个结点
+    while(p){
+        if(p->next->next == NULL){
+            q = p->next;
+            break;
+        }
+        p = p->next;
+    }
+    
+    q->next = NULL;
+    p->next = NULL;
+    
+    //头插法
+    while(pHead){
+        p = pHead;
+        pHead = pHead->next;
+        p->next = q->next;
+        q->next = p;
+        
+    }
+    return q;
+    
+}
